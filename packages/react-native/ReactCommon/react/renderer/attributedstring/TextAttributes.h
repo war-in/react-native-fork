@@ -42,6 +42,7 @@ class TextAttributes : public DebugStringConvertible {
   SharedColor foregroundColor{};
   SharedColor backgroundColor{};
   Float opacity{std::numeric_limits<Float>::quiet_NaN()};
+  std::optional<Float> borderRadius{};
 
   // Font
   std::string fontFamily{""};
@@ -138,7 +139,8 @@ struct hash<facebook::react::TextAttributes> {
         textAttributes.isPressable,
         textAttributes.layoutDirection,
         textAttributes.accessibilityRole,
-        textAttributes.role);
+        textAttributes.role,
+        textAttributes.borderRadius);
   }
 };
 } // namespace std

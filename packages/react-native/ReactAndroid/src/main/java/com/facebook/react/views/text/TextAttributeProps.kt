@@ -67,6 +67,9 @@ public class TextAttributeProps private constructor() {
   public var isBackgroundColorSet: Boolean = false
     private set
 
+  public var borderRadius: Float = Float.NaN
+    private set
+
   public var opacity: Float = Float.NaN
     private set
 
@@ -375,6 +378,7 @@ public class TextAttributeProps private constructor() {
     public const val TA_KEY_ROLE: Int = 26
     public const val TA_KEY_TEXT_TRANSFORM: Int = 27
     public const val TA_KEY_MAX_FONT_SIZE_MULTIPLIER: Int = 29
+    public const val TA_KEY_BORDER_RADIUS: Int = 30
 
     public const val UNSET: Int = -1
 
@@ -429,6 +433,7 @@ public class TextAttributeProps private constructor() {
           TA_KEY_TEXT_TRANSFORM -> result.setTextTransform(entry.stringValue)
           TA_KEY_MAX_FONT_SIZE_MULTIPLIER ->
               result.maxFontSizeMultiplier = entry.doubleValue.toFloat()
+          TA_KEY_BORDER_RADIUS -> result.borderRadius = entry.doubleValue.toFloat()
         }
       }
 

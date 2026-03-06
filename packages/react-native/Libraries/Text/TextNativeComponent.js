@@ -89,11 +89,9 @@ export const NativeVirtualText: HostComponent<NativeTextProps> =
       ): any);
 
 export const NativeSelectableText: HostComponent<NativeTextProps> =
-  enablePreparedTextLayout()
-    ? (createReactNativeComponentClass('RCTSelectableText', () =>
+  (createReactNativeComponentClass('RCTSelectableText', () =>
         createViewConfig({
           ...textViewConfig,
           uiViewClassName: 'RCTSelectableText',
         }),
-      ): any)
-    : NativeText;
+      ): any);

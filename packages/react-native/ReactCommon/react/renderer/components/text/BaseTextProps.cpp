@@ -222,6 +222,12 @@ static TextAttributes convertRawProp(
       "backgroundColor",
       sourceTextAttributes.backgroundColor,
       defaultTextAttributes.backgroundColor);
+  textAttributes.borderRadius = convertRawProp(
+      context,
+      rawProps,
+      "borderRadius",
+      sourceTextAttributes.borderRadius,
+      defaultTextAttributes.borderRadius);
 
   return textAttributes;
 }
@@ -334,6 +340,8 @@ void BaseTextProps::setProp(
         defaults, value, textAttributes, opacity, "opacity");
     REBUILD_FIELD_SWITCH_CASE(
         defaults, value, textAttributes, backgroundColor, "backgroundColor");
+    REBUILD_FIELD_SWITCH_CASE(
+        defaults, value, textAttributes, borderRadius, "borderRadius");
   }
 }
 
@@ -532,6 +540,12 @@ void BaseTextProps::appendTextAttributesProps(
   if (textAttributes.backgroundColor !=
       oldProps->textAttributes.backgroundColor) {
     result["backgroundColor"] = *textAttributes.backgroundColor;
+  }
+
+  if (textAttributes.borderRadius != oldProps->textAttributes.borderRadius) {
+    result["borderRadius"] = textAttributes.borderRadius.has_value()
+        ? textAttributes.borderRadius.value()
+        : folly::dynamic(nullptr);
   }
 }
 

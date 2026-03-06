@@ -27,6 +27,9 @@ void TextAttributes::apply(TextAttributes textAttributes) {
       : backgroundColor;
   opacity =
       !std::isnan(textAttributes.opacity) ? textAttributes.opacity : opacity;
+  borderRadius = textAttributes.borderRadius.has_value()
+      ? textAttributes.borderRadius
+      : borderRadius;
 
   // Font
   fontFamily = !textAttributes.fontFamily.empty() ? textAttributes.fontFamily
@@ -141,7 +144,8 @@ bool TextAttributes::operator==(const TextAttributes& rhs) const {
              layoutDirection,
              accessibilityRole,
              role,
-             textTransform) ==
+             textTransform,
+             borderRadius) ==
       std::tie(
              rhs.foregroundColor,
              rhs.backgroundColor,
@@ -164,7 +168,8 @@ bool TextAttributes::operator==(const TextAttributes& rhs) const {
              rhs.layoutDirection,
              rhs.accessibilityRole,
              rhs.role,
-             rhs.textTransform) &&
+             rhs.textTransform,
+             rhs.borderRadius) &&
       floatEquality(maxFontSizeMultiplier, rhs.maxFontSizeMultiplier) &&
       floatEquality(opacity, rhs.opacity) &&
       floatEquality(fontSize, rhs.fontSize) &&
@@ -199,6 +204,8 @@ SharedDebugStringConvertibleList TextAttributes::getDebugProps() const {
       debugStringConvertibleItem(
           "foregroundColor", foregroundColor, textAttributes.foregroundColor),
       debugStringConvertibleItem("opacity", opacity, textAttributes.opacity),
+      debugStringConvertibleItem(
+          "borderRadius", borderRadius, textAttributes.borderRadius),
 
       // Font
       debugStringConvertibleItem(

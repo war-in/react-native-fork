@@ -53,6 +53,7 @@ import com.facebook.react.uimanager.style.BorderRadiusProp;
 import com.facebook.react.uimanager.style.BorderStyle;
 import com.facebook.react.uimanager.style.LogicalEdge;
 import com.facebook.react.uimanager.style.Overflow;
+import com.facebook.react.views.text.internal.span.DrawCommandSpan;
 import com.facebook.react.views.text.internal.span.ReactFragmentIndexSpan;
 import com.facebook.react.views.text.internal.span.ReactTagSpan;
 import com.facebook.react.views.text.internal.span.TextInlineViewPlaceholderSpan;
@@ -368,6 +369,24 @@ public class ReactTextView extends AppCompatTextView implements ReactCompoundVie
 
       if (mOverflow != Overflow.VISIBLE) {
         BackgroundStyleApplicator.clipToPaddingBox(this, canvas);
+      }
+
+      // Draw custom DrawCommandSpan backgrounds before the text so they appear behind it.
+      // PreparedLayoutTextView handles this natively, but ReactTextView (standard TextView)
+      // does not know about DrawCommandSpan, so we invoke onPreDraw manually here.
+      Layout layout = getLayout();
+      if (spanned != null && layout != null) {
+        DrawCommandSpan[] drawSpans =
+            spanned.getSpans(0, spanned.length(), DrawCommandSpan.class);
+        if (drawSpans != null) {
+          int saveCount = canvas.save();
+          canvas.translate(getTotalPaddingLeft(), getTotalPaddingTop());
+          for (DrawCommandSpan span : drawSpans) {
+            span.onPreDraw(
+                spanned.getSpanStart(span), spanned.getSpanEnd(span), canvas, layout);
+          }
+          canvas.restoreToCount(saveCount);
+        }
       }
 
       super.onDraw(canvas);
