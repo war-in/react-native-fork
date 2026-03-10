@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<e7e7cb27ef8094e8a60c14327d29d192>>
+ * @generated SignedSource<<cbaba5f762ab27737ab468ff521c6685>>
  */
 
 /**
@@ -423,6 +423,15 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     return ReactNativeFeatureFlagsDefaults::enableModuleArgumentNSNullConversionIOS();
   }
 
+  bool enableMutationObserverByDefault() override {
+    auto value = values_["enableMutationObserverByDefault"];
+    if (!value.isNull()) {
+      return value.getBool();
+    }
+
+    return ReactNativeFeatureFlagsDefaults::enableMutationObserverByDefault();
+  }
+
   bool enableNativeCSSParsing() override {
     auto value = values_["enableNativeCSSParsing"];
     if (!value.isNull()) {
@@ -430,6 +439,15 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::enableNativeCSSParsing();
+  }
+
+  bool enableNativeViewPropTransformations() override {
+    auto value = values_["enableNativeViewPropTransformations"];
+    if (!value.isNull()) {
+      return value.getBool();
+    }
+
+    return ReactNativeFeatureFlagsDefaults::enableNativeViewPropTransformations();
   }
 
   bool enableNetworkEventReporting() override {
@@ -583,6 +601,15 @@ class ReactNativeFeatureFlagsDynamicProvider : public ReactNativeFeatureFlagsDef
     }
 
     return ReactNativeFeatureFlagsDefaults::fuseboxEnabledRelease();
+  }
+
+  bool fuseboxFrameRecordingEnabled() override {
+    auto value = values_["fuseboxFrameRecordingEnabled"];
+    if (!value.isNull()) {
+      return value.getBool();
+    }
+
+    return ReactNativeFeatureFlagsDefaults::fuseboxFrameRecordingEnabled();
   }
 
   bool fuseboxNetworkInspectionEnabled() override {

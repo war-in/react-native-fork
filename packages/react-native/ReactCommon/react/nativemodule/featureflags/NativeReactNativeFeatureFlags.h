@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<567578eba7383f26c5d745c57d110e61>>
+ * @generated SignedSource<<7db04fd2e9b9ea200fe1ef894ab33727>>
  */
 
 /**
@@ -120,7 +120,11 @@ class NativeReactNativeFeatureFlags
 
   bool enableModuleArgumentNSNullConversionIOS(jsi::Runtime& runtime);
 
+  bool enableMutationObserverByDefault(jsi::Runtime& runtime);
+
   bool enableNativeCSSParsing(jsi::Runtime& runtime);
+
+  bool enableNativeViewPropTransformations(jsi::Runtime& runtime);
 
   bool enableNetworkEventReporting(jsi::Runtime& runtime);
 
@@ -155,6 +159,8 @@ class NativeReactNativeFeatureFlags
   bool fuseboxAssertSingleHostState(jsi::Runtime& runtime);
 
   bool fuseboxEnabledRelease(jsi::Runtime& runtime);
+
+  bool fuseboxFrameRecordingEnabled(jsi::Runtime& runtime);
 
   bool fuseboxNetworkInspectionEnabled(jsi::Runtime& runtime);
 

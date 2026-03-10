@@ -269,10 +269,10 @@ const AccessibilityInfo = {
    * See https://reactnative.dev/docs/accessibilityinfo#prefersCrossFadeTransitions
    */
   prefersCrossFadeTransitions(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (Platform.OS === 'android') {
-        return Promise.resolve(false);
-      } else {
+    if (Platform.OS === 'android') {
+      return Promise.resolve(false);
+    } else {
+      return new Promise((resolve, reject) => {
         if (
           NativeAccessibilityManagerIOS?.getCurrentPrefersCrossFadeTransitionsState !=
           null
@@ -288,8 +288,8 @@ const AccessibilityInfo = {
             ),
           );
         }
-      }
-    });
+      });
+    }
   },
 
   /**
@@ -424,7 +424,7 @@ const AccessibilityInfo = {
    *
    * See https://reactnative.dev/docs/accessibilityinfo#addeventlistener
    */
-  addEventListener<K: keyof AccessibilityEventDefinitions>(
+  addEventListener<K extends keyof AccessibilityEventDefinitions>(
     eventName: K,
     // $FlowFixMe[incompatible-type] - Flow bug with unions and generics (T128099423)
     handler: (...AccessibilityEventDefinitions[K]) => void,

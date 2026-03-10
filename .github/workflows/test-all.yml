@@ -37,9 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'facebook/react-native'
     outputs:
-      any_code_change: ${{ steps.filter_exclusions.outputs.any_code_change || github.event_name != 'pull_request' }}
-      should_test_android: ${{ steps.filter_exclusions.outputs.should_test_android || github.event_name != 'pull_request' }}
-      should_test_ios: ${{ steps.filter_exclusions.outputs.should_test_ios || github.event_name != 'pull_request' }}
+      any_code_change: ${{ steps.filter_exclusions.outputs.any_code_change == 'true' || github.event_name != 'pull_request' }}
+      should_test_android: ${{ steps.filter_exclusions.outputs.should_test_android == 'true' || github.event_name != 'pull_request' }}
+      should_test_ios: ${{ steps.filter_exclusions.outputs.should_test_ios == 'true' || github.event_name != 'pull_request' }}
       debugger_shell: ${{ steps.filter_inclusions.outputs.debugger_shell }}
     steps:
       - name: Checkout
@@ -338,7 +338,7 @@ jobs:
           flavor: ${{ matrix.flavor }}
           working-directory: /tmp/RNTestProject
 
-  run_fantom_tests:
+  build_fantom_runner:
     runs-on: 8-core-ubuntu
     needs: [set_release_type, check_code_changes, lint]
     if: needs.check_code_changes.outputs.any_code_change == 'true'
@@ -356,11 +356,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      - name: Build and Test Fantom
-        uses: ./.github/actions/run-fantom-tests
+      - name: Build Fantom Runner
+        uses: ./.github/actions/build-fantom-runner
         with:
           release-type: ${{ needs.set_release_type.outputs.RELEASE_TYPE }}
           gradle-cache-encryption-key: ${{ secrets.GRADLE_CACHE_ENCRYPTION_KEY }}
+
+  run_fantom_tests:
+    runs-on: 8-core-ubuntu
+    needs: [build_fantom_runner]
+    container:
+      image: reactnativecommunity/react-native-android:latest
+      env:
+        TERM: "dumb"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Run Fantom Tests
+        uses: ./.github/actions/run-fantom-tests
 
   build_android:
     runs-on: 8-core-ubuntu
@@ -623,7 +636,7 @@ jobs:
         uses: ./.github/actions/yarn-install
       - name: Build packages
         shell: bash
-        run: yarn build
+        run: yarn build --prepack
       - name: Verify debugger-shell build
         shell: bash
         run: node scripts/debugger-shell/build-binary.js

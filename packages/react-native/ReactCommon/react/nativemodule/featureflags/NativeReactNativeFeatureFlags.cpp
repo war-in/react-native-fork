@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @generated SignedSource<<f363d5150ebc0aef50e41f7d42c0e3ce>>
+ * @generated SignedSource<<ce2fa6a5b28f4a59c63f92556b22eb99>>
  */
 
 /**
@@ -254,9 +254,19 @@ bool NativeReactNativeFeatureFlags::enableModuleArgumentNSNullConversionIOS(
   return ReactNativeFeatureFlags::enableModuleArgumentNSNullConversionIOS();
 }
 
+bool NativeReactNativeFeatureFlags::enableMutationObserverByDefault(
+    jsi::Runtime& /*runtime*/) {
+  return ReactNativeFeatureFlags::enableMutationObserverByDefault();
+}
+
 bool NativeReactNativeFeatureFlags::enableNativeCSSParsing(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::enableNativeCSSParsing();
+}
+
+bool NativeReactNativeFeatureFlags::enableNativeViewPropTransformations(
+    jsi::Runtime& /*runtime*/) {
+  return ReactNativeFeatureFlags::enableNativeViewPropTransformations();
 }
 
 bool NativeReactNativeFeatureFlags::enableNetworkEventReporting(
@@ -342,6 +352,11 @@ bool NativeReactNativeFeatureFlags::fuseboxAssertSingleHostState(
 bool NativeReactNativeFeatureFlags::fuseboxEnabledRelease(
     jsi::Runtime& /*runtime*/) {
   return ReactNativeFeatureFlags::fuseboxEnabledRelease();
+}
+
+bool NativeReactNativeFeatureFlags::fuseboxFrameRecordingEnabled(
+    jsi::Runtime& /*runtime*/) {
+  return ReactNativeFeatureFlags::fuseboxFrameRecordingEnabled();
 }
 
 bool NativeReactNativeFeatureFlags::fuseboxNetworkInspectionEnabled(

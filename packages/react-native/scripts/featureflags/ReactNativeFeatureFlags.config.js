@@ -496,12 +496,32 @@ const definitions: FeatureFlagDefinitions = {
       },
       ossReleaseStage: 'none',
     },
+    enableMutationObserverByDefault: {
+      defaultValue: false,
+      metadata: {
+        description: 'Enables the MutationObserver Web API in React Native.',
+        expectedReleaseValue: true,
+        purpose: 'release',
+      },
+      ossReleaseStage: 'none',
+    },
     enableNativeCSSParsing: {
       defaultValue: false,
       metadata: {
         dateAdded: '2025-02-07',
         description:
           'Parse CSS strings using the Fabric CSS parser instead of ViewConfig processing',
+        expectedReleaseValue: true,
+        purpose: 'experimentation',
+      },
+      ossReleaseStage: 'none',
+    },
+    enableNativeViewPropTransformations: {
+      defaultValue: false,
+      metadata: {
+        dateAdded: '2026-02-26',
+        description:
+          'When enabled, View.js passes aria-*, id, and tabIndex props directly to native, relying on C++ prop parsing instead of JS-side transformations.',
         expectedReleaseValue: true,
         purpose: 'experimentation',
       },
@@ -686,6 +706,17 @@ const definitions: FeatureFlagDefinitions = {
           'Flag determining if the React Native DevTools (Fusebox) CDP backend should be enabled in release builds. This flag is global and should not be changed across React Host lifetimes.',
         expectedReleaseValue: true,
         purpose: 'release',
+      },
+      ossReleaseStage: 'none',
+    },
+    fuseboxFrameRecordingEnabled: {
+      defaultValue: false,
+      metadata: {
+        dateAdded: '2026-03-05',
+        description:
+          'Enable frame timings and screenshots support in the React Native DevTools CDP backend. This flag is global and should not be changed across React Host lifetimes.',
+        expectedReleaseValue: true,
+        purpose: 'experimentation',
       },
       ossReleaseStage: 'none',
     },
