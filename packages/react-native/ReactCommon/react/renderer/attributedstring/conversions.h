@@ -1128,6 +1128,7 @@ constexpr static MapBuffer::Key TA_KEY_ROLE = 26;
 constexpr static MapBuffer::Key TA_KEY_TEXT_TRANSFORM = 27;
 constexpr static MapBuffer::Key TA_KEY_ALIGNMENT_VERTICAL = 28;
 constexpr static MapBuffer::Key TA_KEY_MAX_FONT_SIZE_MULTIPLIER = 29;
+constexpr static MapBuffer::Key TA_KEY_BORDER_RADIUS = 30;
 
 // constants for ParagraphAttributes serialization
 constexpr static MapBuffer::Key PA_KEY_MAX_NUMBER_OF_LINES = 0;
@@ -1331,6 +1332,9 @@ inline MapBuffer toMapBuffer(const TextAttributes &textAttributes)
   }
   if (textAttributes.role.has_value()) {
     builder.putInt(TA_KEY_ROLE, static_cast<int32_t>(*textAttributes.role));
+  }
+  if (textAttributes.borderRadius.has_value()) {
+    builder.putDouble(TA_KEY_BORDER_RADIUS, *textAttributes.borderRadius);
   }
   return builder.build();
 }

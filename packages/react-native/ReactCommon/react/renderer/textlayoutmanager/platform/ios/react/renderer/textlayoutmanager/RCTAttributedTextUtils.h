@@ -19,6 +19,9 @@ NSString *const RCTAttributedStringEventEmitterKey = @"EventEmitter";
 // String representation of either `role` or `accessibilityRole`
 NSString *const RCTTextAttributesAccessibilityRoleAttributeName = @"AccessibilityRole";
 
+// Custom attribute for border radius on inline text backgrounds
+NSString *const RCTTextBorderRadiusAttributeName = @"RCTTextBorderRadius";
+
 /*
  * Creates `NSTextAttributes` from given `facebook::react::TextAttributes`
  */

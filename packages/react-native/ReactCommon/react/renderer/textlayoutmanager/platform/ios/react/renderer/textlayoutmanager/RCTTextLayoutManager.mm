@@ -8,6 +8,7 @@
 #import "RCTTextLayoutManager.h"
 
 #import "RCTAttributedTextUtils.h"
+#import "RCTTextLayoutManagerWithBorderRadius.h"
 
 #import <React/NSTextStorage+FontScaling.h>
 #import <React/RCTUtils.h>
@@ -232,7 +233,7 @@ static NSLineBreakMode RCTNSLineBreakModeFromEllipsizeMode(EllipsizeMode ellipsi
       : NSLineBreakByClipping;
   textContainer.maximumNumberOfLines = paragraphAttributes.maximumNumberOfLines;
 
-  NSLayoutManager *layoutManager = [NSLayoutManager new];
+  NSLayoutManager *layoutManager = [RCTTextLayoutManagerWithBorderRadius new];
   layoutManager.usesFontLeading = NO;
   [layoutManager addTextContainer:textContainer];
 

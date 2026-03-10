@@ -958,6 +958,32 @@ const examples = [
           <Text style={{fontSize: 12}}>
             <Entity>Entity Name</Entity>
           </Text>
+          <Text>
+            Nested text with{' '}
+            <Text
+              style={{
+                backgroundColor: 'blue',
+                color: 'white',
+                borderRadius: 5,
+              }}>
+              borderRadius 5
+            </Text>{' '}
+            <Text
+              style={{
+                backgroundColor: 'green',
+                color: 'white',
+                borderRadius: 10,
+              }}>
+              borderRadius 10
+            </Text>
+            {' and '}
+            <Text
+              style={{
+                backgroundColor: 'red',
+              }}>
+              no borderRadius
+            </Text>
+          </Text>
         </View>
       );
     },

@@ -41,6 +41,7 @@ import com.facebook.react.views.text.internal.span.CustomLineHeightSpan
 import com.facebook.react.views.text.internal.span.CustomStyleSpan
 import com.facebook.react.views.text.internal.span.ReactAbsoluteSizeSpan
 import com.facebook.react.views.text.internal.span.ReactBackgroundColorSpan
+import com.facebook.react.views.text.internal.span.ReactBackgroundDrawSpan
 import com.facebook.react.views.text.internal.span.ReactClickableSpan
 import com.facebook.react.views.text.internal.span.ReactForegroundColorSpan
 import com.facebook.react.views.text.internal.span.ReactFragmentIndexSpan
@@ -270,7 +271,13 @@ internal object TextLayoutManager {
         }
         if (textAttributes.isBackgroundColorSet) {
           textAttributes.backgroundColor
-              ?.let { ReactBackgroundColorSpan(it) }
+              ?.let {
+                if (!textAttributes.borderRadius.isNaN()) {
+                  ReactBackgroundDrawSpan(it, PixelUtil.toPixelFromDIP(textAttributes.borderRadius))
+                } else {
+                  ReactBackgroundColorSpan(it)
+                }
+              }
               ?.let { SetSpanOperation(start, end, it) }
               ?.let { ops.add(it) }
         }
@@ -439,12 +446,16 @@ internal object TextLayoutManager {
         }
 
         if (fragment.props.isBackgroundColorSet) {
-          spannable.setSpan(
-              fragment.props.backgroundColor?.let { ReactBackgroundColorSpan(it) },
-              start,
-              end,
-              spanFlags,
-          )
+          val bgSpan =
+              fragment.props.backgroundColor?.let {
+                if (!fragment.props.borderRadius.isNaN()) {
+                  ReactBackgroundDrawSpan(
+                      it, PixelUtil.toPixelFromDIP(fragment.props.borderRadius))
+                } else {
+                  ReactBackgroundColorSpan(it)
+                }
+              }
+          spannable.setSpan(bgSpan, start, end, spanFlags)
         }
 
         if (!fragment.props.opacity.isNaN()) {

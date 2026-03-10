@@ -187,6 +187,10 @@ NSMutableDictionary<NSAttributedStringKey, id> *RCTNSTextAttributesFromTextAttri
     attributes[NSBackgroundColorAttributeName] = RCTEffectiveBackgroundColorFromTextAttributes(textAttributes);
   }
 
+  if (textAttributes.borderRadius.has_value()) {
+    attributes[RCTTextBorderRadiusAttributeName] = @(*textAttributes.borderRadius);
+  }
+
   // Kerning
   if (!isnan(textAttributes.letterSpacing)) {
     attributes[NSKernAttributeName] = @(textAttributes.letterSpacing);
