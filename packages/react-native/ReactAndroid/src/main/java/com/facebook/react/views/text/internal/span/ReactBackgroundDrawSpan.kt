@@ -78,14 +78,9 @@ internal class ReactBackgroundDrawSpan(
       } else {
         val isFirstLine = line == startLine
         val isLastLine = line == endLine
-        val isSingleLine = isFirstLine && isLastLine
 
-        if (isSingleLine) {
-          canvas.drawRoundRect(rectF, borderRadius, borderRadius, paint)
-        } else {
-          val rtl = layout.getParagraphDirection(line) == Layout.DIR_RIGHT_TO_LEFT
-          drawSelectiveRoundRect(canvas, rectF, isFirstLine, isLastLine, rtl)
-        }
+        val rtl = layout.getParagraphDirection(line) == Layout.DIR_RIGHT_TO_LEFT
+        drawSelectiveRoundRect(canvas, rectF, isFirstLine, isLastLine, rtl)
       }
     }
   }

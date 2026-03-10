@@ -792,6 +792,32 @@ function NestedExample(props: {}): React.Node {
         <Text style={{color: 'blue'}}>blue color, </Text>
         and red color again
       </Text>
+      <Text>
+        Nested text with{' '}
+        <Text
+          style={{
+            backgroundColor: 'blue',
+            color: 'white',
+            borderRadius: 5,
+          }}>
+          borderRadius 5
+        </Text>{' '}
+        <Text
+          style={{
+            backgroundColor: 'green',
+            color: 'white',
+            borderRadius: 10,
+          }}>
+          borderRadius 10
+        </Text>
+        {' and '}
+        <Text
+          style={{
+            backgroundColor: 'red',
+          }}>
+          no borderRadius
+        </Text>
+      </Text>
       <RNTesterText style={{opacity: 0.7}}>
         (opacity
         <RNTesterText>
